@@ -5,7 +5,6 @@ import reactor.core.publisher.Mono;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -23,11 +22,10 @@ public class Exercise6 {
 
         // Get the value from unresponsiveFlux into a String list but give up after 5 seconds
         // Come back and do this when you've learnt about operators!
-        List<String> list = new ArrayList<>();
-        ReactiveSources.unresponsiveFlux()
+        List<String> list = ReactiveSources.unresponsiveFlux()
+                .collectList()
                 .timeout(Duration.ofSeconds(5))
-                .map(s -> list.add(s))
-                .subscribe();
+                .block();
 
         System.out.println("Press a key to end");
         System.in.read();
