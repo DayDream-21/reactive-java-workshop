@@ -21,7 +21,7 @@ public class ReactiveSources {
     public static Flux<Integer> intNumbersFlux() {
         return Flux
                 .range(1, 10)
-                .delayElements(Duration.ofSeconds(1));
+                .delayElements(Duration.ofMillis(100L));
     }
 
     public static Flux<Integer> intNumbersFluxWithException() {
@@ -47,7 +47,7 @@ public class ReactiveSources {
                 new User(4, "Zinedine", "Zidane"),
                 new User(5, "Jürgen", "Klinsmann"),
                 new User(6, "Gareth", "Bale")
-        ).delayElements(Duration.ofSeconds(1));
+        ).delayElements(Duration.ofMillis(100L));
     }
 
     public static Mono<User> userMono() {
