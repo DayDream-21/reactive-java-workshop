@@ -25,8 +25,8 @@ public class Exercise6 {
         // Come back and do this when you've learnt about operators!
         List<String> list = new ArrayList<>();
         ReactiveSources.unresponsiveFlux()
+                .collectList()
                 .timeout(Duration.ofSeconds(5))
-                .map(s -> list.add(s))
                 .subscribe();
 
         System.out.println("Press a key to end");
