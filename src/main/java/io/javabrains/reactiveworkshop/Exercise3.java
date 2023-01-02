@@ -2,24 +2,21 @@ package io.javabrains.reactiveworkshop;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.stream.Collectors;
 
 public class Exercise3 {
-    public static void main(String[] args) throws IOException, ExecutionException, InterruptedException, TimeoutException {
+    public static void main(String[] args) throws IOException {
         // Use ReactiveSources.intNumbersFlux()
 
         // Get all numbers in the ReactiveSources.intNumbersFlux stream
         // into a List and print the list and its size
-        CompletableFuture<List<Integer>> task = CompletableFuture.supplyAsync(() -> ReactiveSources.intNumbersFlux()
+        List<Integer> list = ReactiveSources
+                .intNumbersFlux()
+                .log()
                 .toStream()
-                .collect(Collectors.toList()));
+                .toList();
 
+        System.out.println(list);
         System.out.println("Press a key to end");
         System.in.read();
-        System.out.println(task.get(8L, TimeUnit.SECONDS));
     }
 }
